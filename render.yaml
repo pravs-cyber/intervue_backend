@@ -1,0 +1,25 @@
+# Render Blueprint. In the Render dashboard: New -> Blueprint -> point at your repo.
+# (Or skip this file entirely and create the Web Service manually with the same settings.)
+services:
+  - type: web
+    name: intervue-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    plan: free
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: SECRET_KEY
+        sync: false        # set a long random value yourself in the Render dashboard - never commit it
+      - key: AI_API_KEY
+        sync: false        # your Groq (or other OpenAI-compatible) key
+      - key: AI_BASE_URL
+        value: https://api.groq.com/openai/v1
+      - key: AI_MODEL
+        value: openai/gpt-oss-20b
+      - key: FRONTEND_ORIGIN
+        sync: false        # your Vercel URL(s), comma-separated, e.g. https://intervue.vercel.app
+      - key: RATE_LIMIT_PER_MINUTE
+        value: "20"

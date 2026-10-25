@@ -1,0 +1,16 @@
+# Slim, RUNTIME-ONLY dependencies for serving the API on Render.
+# Verified by tracing every import reachable from main.py at startup/request time.
+# (The project's full root-level requirements.txt also installs pandas/pyarrow/datasets/pytest,
+#  which are only needed for the ml/ training & evaluation SCRIPTS, not for serving the app.)
+fastapi
+uvicorn[standard]
+numpy
+scikit-learn
+scipy
+joblib
+pandas            # needed at startup: database/db.py applies data/sources/bank_references.csv via pandas
+httpx
+python-dotenv
+pyjwt
+pypdf
+python-multipart

@@ -1,0 +1,7 @@
+answer_model.pkl (your trained Random Forest, ~137 MB) was intentionally left OUT of this package.
+
+Why: it is larger than GitHub's 100 MB per-file limit for a normal `git push`, and larger than
+what's practical to send through chat. You already have the real file locally (it was in the
+project zip you gave me). Copy YOUR existing backend/ml/answer_model.pkl into this exact folder
+before deploying, then follow one of the two options in DEPLOY_RENDER.md to get it onto Render
+(Git LFS, or a build-time download from a release/storage URL).

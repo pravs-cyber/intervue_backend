@@ -1,0 +1,30 @@
+# Put this at your REPO ROOT (it replaces/merges with your current root .gitignore).
+# The previous version blanket-ignored *.pkl under backend/ml/, which silently excluded the
+# exact model file the running app needs. This version ignores the known-large, NOT-needed-at-
+# runtime artifacts individually, and explicitly keeps backend/ml/answer_model.pkl trackable.
+
+.env
+__pycache__/
+*.db
+node_modules/
+.next/
+.egg-info/
+.pytest_cache/
+data/external/
+
+# ml/ experiment & candidate artifacts - large, not used by the running app (only answer_model.pkl is)
+backend/ml/candidates/
+backend/ml/baselines/
+backend/ml/v1_baseline/
+backend/ml/embeddings/*.npz
+backend/ml/results/
+backend/ml/tfidf_vectorizer.pkl
+backend/ml/answer_quality_model.pkl
+backend/glove-wiki-gigaword-100.gz
+
+# NOTE: backend/ml/answer_model.pkl is intentionally NOT ignored - the deployed app loads it directly.
+# It is ~137 MB, over GitHub's 100 MB per-file limit for a plain push - track it with Git LFS:
+#   git lfs install
+#   git lfs track "backend/ml/answer_model.pkl"
+#   git add .gitattributes backend/ml/answer_model.pkl
+# See DEPLOY_RENDER.md for this and the alternative (download-at-build) approach.
